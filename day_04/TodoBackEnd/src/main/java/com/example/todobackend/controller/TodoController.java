@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping("api/v1")
 @AllArgsConstructor
 public class TodoController {
+    // Inject bean
     private final TodoService todoService;
 
     // Lấy danh sách tất cả công việc

@@ -17,7 +17,7 @@ public class TodoService {
     // Tạo ra danh sách todos để quản lý
     private List<Todo> todos;
 
-    // Trong constructor, tạo ra 1 số đối tượng todo và thêm vào danh sách
+    // Trong constructor, tạo ra 1 số công việc và thêm vào danh sách
     public TodoService() {
         Random rd = new Random();
         todos = new ArrayList<>();
@@ -27,6 +27,7 @@ public class TodoService {
         todos.add(new Todo(rd.nextInt(100), "Đi chơi với bạn bè", true));
     }
 
+    // Lấy danh sách công việc theo trạng thái
     public List<Todo> getTodos(String status) {
         return switch (status) {
             case "true" -> todos.stream().filter(Todo::isStatus).collect(Collectors.toList());
@@ -35,6 +36,7 @@ public class TodoService {
         };
     }
 
+    // Lấy thông tin công việc theo id
     public Todo getTodoById(int id) {
         Optional<Todo> todoOptional = findById(id);
 //        if(todoOptional.isPresent()) {
@@ -48,6 +50,7 @@ public class TodoService {
         });
     }
 
+    // Tạo công việc mới
     public Todo createTodo(CreateTodoRequest request) {
         // Có thể validate title nếu để trống (Tạo thêm BadRequestException)
 
@@ -58,6 +61,7 @@ public class TodoService {
         return todo;
     }
 
+    // Cập nhật công việc
     public Todo updateTodo(int id, UpdateTodoRequest request) {
         // Kiểm tra xem công việc có tồn tại hay không
 //        Optional<Todo> todoOptional = findById(id);
@@ -74,12 +78,13 @@ public class TodoService {
         return todo;
     }
 
+    // Xóa công việc
     public void deleteTodo(int id) {
         Todo todo = getTodoById(id);
         todos.removeIf(t -> t.getId() == todo.getId());
     }
 
-    // Helper method : Tìm kiếm 1 todo theo id
+    // Helper method : Tìm kiếm 1 công việc theo id
     public Optional<Todo> findById(int id) {
         return todos.stream().filter(todo -> todo.getId() == id).findFirst();
     }
