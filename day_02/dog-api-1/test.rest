@@ -1,0 +1,15 @@
+GET https://dog.ceo/api/breeds/image/random HTTP/1.1
+
+###
+
+GET https://dog.ceo/api/breeds/list/all HTTP/1.1
+
+###
+
+POST https://dog.ceo/api/breeds/list/all HTTP/1.1
+Content-Type: application/json
+
+{
+    "name" : "abc",
+    "age" : 25
+}
