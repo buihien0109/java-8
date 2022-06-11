@@ -8,7 +8,10 @@ import com.example.userbackend.model.User;
 import com.example.userbackend.request.CreateUserRequest;
 import com.example.userbackend.request.UpdatePasswordRequest;
 import com.example.userbackend.request.UpdateUserRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,9 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
     private List<User> users;
+
+    @Autowired
+    private FileService fileService;
 
     public UserService() {
         initData();
@@ -143,6 +149,34 @@ public class UserService {
         return password;
     }
 
+    // Upload file
+    public String uploadFile(int id, MultipartFile file) {
+        if(findUser(id).isEmpty()) {
+            throw new NotFoundException("Không tồn tại user có id = " + id);
+        }
+
+        return fileService.uploadFile(id, file);
+    }
+
+    // Xem file
+    public byte[] readFile(int id, String fileId) {
+        return fileService.readFile(id, fileId);
+    }
+
+    // Xóa file
+    public void deleteFile(int id, String fileId) {
+        fileService.deleteFile(id, fileId);
+    }
+
+    // Lấy danh sách file
+    public List<String> getFiles(int id) {
+        if(findUser(id).isEmpty()) {
+            throw new NotFoundException("Không tồn tại user có id = " + id);
+        }
+
+        return fileService.getFiles(id);
+    }
+
     // HELPER METHOD
     public Optional<User> findUser(int id) {
         return users.stream().filter(user -> user.getId() == id).findFirst();
@@ -150,6 +184,4 @@ public class UserService {
     public Optional<User> findUser(String email) {
         return users.stream().filter(user -> user.getEmail().equals(email)).findFirst();
     }
-
-
 }
