@@ -1,5 +1,5 @@
 // Khai báo API URL root
-const API_URL = "http://localhost:8080/api/v1";
+const API_URL = "/api/v1";
 
 // Truy cập vào các thành phần
 const addressEl = document.getElementById("address");
@@ -25,49 +25,13 @@ const modalImage = new bootstrap.Modal(document.getElementById('modal-image'), {
     keyboard: false
 })
 
-// Lưu lại danh sách ảnh của user trong page hiện tại;
-let imagesOfUser = [];
+// Lưu lại id của user
+let id = user.id;
 
 // Xử lý nút quay lại
 btnBack.addEventListener("click", function () {
     window.location.href = "/";
 });
-
-// Lấy id trên URL
-const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
-
-// Kiểm tra có id hay không?
-const checkUserExist = () => {
-    if(!id) {
-        window.location.href = "/404.html";
-    }
-}
-
-// Gọi API
-const getUser = async (id) => {
-    try {
-        let res = await axios.get(`${API_URL}/users/${id}`);
-        renderUser(res.data);
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-// Render user
-const renderUser = (user) => {
-    nameEl.value = user.name;
-    emailEl.value = user.email;
-    phoneEl.value = user.phone;
-    addressEl.value = user.address;
-
-    // Avatar
-    if (!user.avatar) {
-        avatarPreviewEl.src = "https://via.placeholder.com/200";
-    } else {
-        avatarPreviewEl.src = `http://localhost:8080${user.avatar}`;
-    }
-};
 
 // API lấy danh sách tỉnh - thành phố
 async function getProvince() {
@@ -149,7 +113,7 @@ const renderImage = (arr) => {
         const f = arr[i];
         imageContainerEl.innerHTML += `
             <div class="image-item" onclick="choseImage(this)">
-                <img src="http://localhost:8080${f}" alt="${f}" data-src="${f}">
+                <img src="${f}" alt="${f}" data-src="${f}">
             </div>
         `
     }
@@ -209,17 +173,14 @@ btnDeleteImage.addEventListener("click", async function() {
         const imageSelected = document.querySelector(".selected img");
 
         // Lấy ra đường dẫn ảnh của ảnh đang chọn
-        const srcOfImageSelected = imageSelected.dataset.src;
-
-        // Lấy ra tên ảnh
-        const indexStart = srcOfImageSelected.lastIndexOf("/")
-        const imageName = srcOfImageSelected.slice(indexStart + 1).trim();
+        const srcOfImageSelected = imageSelected.src;
 
         // Gọi API set lại ảnh cho user
-        await axios.delete(`${API_URL}/users/${id}/files/${imageName}`);
+        await axios.delete(srcOfImageSelected);
 
         // Xóa ảnh trong mảng ban đầu
         imagesOfUser = imagesOfUser.filter(img => img != srcOfImageSelected)
+        console.log(imagesOfUser)
 
         // Render lại image + pagination
         renderImageAndPagination(imagesOfUser);
@@ -228,13 +189,10 @@ btnDeleteImage.addEventListener("click", async function() {
     }
 })
 
-
 // Chạy lấy tỉnh thành phố trước, sau đó mới lấy thông tin user
 const init = async () => {
-    checkUserExist();
-
     await getProvince();
-    await getUser(id);
+    addressEl.value = user.address;
 };
 
 init();

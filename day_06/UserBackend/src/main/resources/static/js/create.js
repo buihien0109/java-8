@@ -29,7 +29,7 @@ btnSave.addEventListener("click", async function () {
         console.log(userNew);
 
         // Gọi API để tạo
-        let res = await axios.post("http://localhost:8080/api/v1/users", userNew);
+        let res = await axios.post("/api/v1/users", userNew);
 
         if (res.data) {
             window.location.href = "/";
