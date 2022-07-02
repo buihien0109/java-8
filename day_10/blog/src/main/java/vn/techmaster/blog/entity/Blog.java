@@ -2,12 +2,47 @@ package vn.techmaster.blog.entity;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import vn.techmaster.blog.dto.BlogInfo;
+import vn.techmaster.blog.dto.UserDto;
+import vn.techmaster.blog.dto.UserImageInfo;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@SqlResultSetMapping(
+        name = "listBlogInfo",
+        classes = @ConstructorResult(
+                targetClass = BlogInfo.class,
+                columns = {
+                        @ColumnResult(name = "id", type = String.class),
+                        @ColumnResult(name = "title", type = String.class),
+                        @ColumnResult(name = "slug", type = String.class),
+                        @ColumnResult(name = "description", type = String.class),
+                        @ColumnResult(name = "thumbnail", type = String.class),
+                        @ColumnResult(name = "pulished_at", type = String.class),
+                        @ColumnResult(name = "count_comment", type = Integer.class),
+                        @ColumnResult(name = "author", type = String.class)
+                }
+        )
+)
+@NamedNativeQuery(
+        name = "getAllBlogInfo",
+        resultSetMapping = "listBlogInfo",
+        query = "SELECT b.id, b.title, b.slug , b.description , b.thumbnail ,\n" +
+                "DATE_FORMAT(b.pulished_at, '%d/%m/%Y') as pulished_at ,\n" +
+                "JSON_OBJECT(\"id\", u.id, \"name\", u.name) as author,\n" +
+                "count(c.id) as count_comment\n" +
+                "FROM blog b \n" +
+                "LEFT JOIN `user` u \n" +
+                "ON b.user_id = u.id\n" +
+                "LEFT JOIN comment c \n" +
+                "ON b.id = c.blog_id \n" +
+                "WHERE b.status = 1\n" +
+                "GROUP BY b.id\n" +
+                "ORDER BY b.pulished_at DESC "
+)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -38,13 +73,13 @@ public class Blog {
     private String thumbnail;
 
     @Column(name = "created_at", columnDefinition = "TIMESTAMP")
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at", columnDefinition = "TIMESTAMP")
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
     @Column(name = "pulished_at", columnDefinition = "TIMESTAMP")
-    private LocalDateTime pulished_at;
+    private LocalDateTime pulishedAt;
 
     @Column(name = "status", columnDefinition = "int default 0")
     private int status;
@@ -61,10 +96,10 @@ public class Blog {
 
     @PrePersist
     public void prePersist() {
-        created_at = LocalDateTime.now().minusMonths(2);
-        updated_at =created_at;
+        createdAt = LocalDateTime.now().minusMonths(2);
+        updatedAt =createdAt;
         if(status == 1) {
-            pulished_at = updated_at;
+            pulishedAt = updatedAt;
         }
     }
 }

@@ -85,12 +85,6 @@ public class InitDataTest {
     }
 
     @Test
-    void get_images_by_user_id() {
-        List<Image> images = imageRepository.getImagesByUserId(21);
-        images.forEach(System.out::println);
-    }
-
-    @Test
     void save_blog() {
         List<User> users = userRepository.findAll();
         List<Category> categories = categoryRepository.findAll();
