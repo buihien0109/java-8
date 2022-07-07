@@ -20,6 +20,7 @@ import java.util.List;
                         @ColumnResult(name = "title", type = String.class),
                         @ColumnResult(name = "slug", type = String.class),
                         @ColumnResult(name = "description", type = String.class),
+                        @ColumnResult(name = "content", type = String.class),
                         @ColumnResult(name = "thumbnail", type = String.class),
                         @ColumnResult(name = "pulished_at", type = String.class),
                         @ColumnResult(name = "count_comment", type = Integer.class),
@@ -30,7 +31,7 @@ import java.util.List;
 @NamedNativeQuery(
         name = "getAllBlogInfo",
         resultSetMapping = "listBlogInfo",
-        query = "SELECT b.id, b.title, b.slug , b.description , b.thumbnail ,\n" +
+        query = "SELECT b.id, b.title, b.slug , b.description , b.content, b.thumbnail ,\n" +
                 "DATE_FORMAT(b.pulished_at, '%d/%m/%Y') as pulished_at ,\n" +
                 "JSON_OBJECT(\"id\", u.id, \"name\", u.name) as author,\n" +
                 "count(c.id) as count_comment\n" +

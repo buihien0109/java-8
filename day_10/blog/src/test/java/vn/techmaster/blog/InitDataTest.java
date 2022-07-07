@@ -72,7 +72,7 @@ public class InitDataTest {
             User userRd = users.get(rd.nextInt(users.size()));
 
             Image image = Image.builder()
-                    .url(faker.internet().image())
+                    .url(faker.company().logo())
                     .user(userRd)
                     .build();
 

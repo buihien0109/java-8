@@ -11,16 +11,18 @@ public class BlogInfo {
     private String title;
     private String slug;
     private String description;
+    private String content;
     private String thumbnail;
     private String pulishedAt;
     private Integer countComment;
     private AuthorInfo authorInfo;
 
-    public BlogInfo(String id, String title, String slug, String description, String thumbnail, String pulishedAt, Integer countComment, String authorInfo) {
+    public BlogInfo(String id, String title, String slug, String description, String content, String thumbnail, String pulishedAt, Integer countComment, String authorInfo) {
         this.id = id;
         this.title = title;
         this.slug = slug;
         this.description = description;
+        this.content = content;
         this.thumbnail = thumbnail;
         this.pulishedAt = pulishedAt;
         this.countComment = countComment;

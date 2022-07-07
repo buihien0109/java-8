@@ -31,25 +31,25 @@
                 <div class="col-lg-8">
                     <div class="all-blog-posts">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-6" th:each="blog : ${blogs}">
                                 <div class="blog-post">
                                     <div class="blog-thumb">
-                                        <img src="assets/images/blog-thumb-01.jpg" alt="" />
+                                        <img th:src="${blog.thumbnail}" th:alt="${blog.title}" />
                                     </div>
                                     <div class="down-content">
-                                        <a href="detail.html">
-                                            <h4>Donec tincidunt leo</h4>
+                                        <a th:href="@{/blogs/{id}/{slug} (id = ${blog.id}, slug = ${blog.slug})}">
+                                            <h4 th:text="${#strings.substring(blog.title,0,20) + ' ...'}">Donec tincidunt leo</h4>
                                         </a>
                                         <ul class="post-info">
-                                            <li><a href="#">Admin</a></li>
+                                            <li><a href="#" th:text="${blog.authorInfo.name}">Admin</a></li>
                                             <li>
-                                                <a href="#">31/05/2020</a>
+                                                <a href="#" th:text="${blog.pulishedAt}">31/05/2020</a>
                                             </li>
                                             <li>
-                                                <a href="#">12 Comments</a>
+                                                <a href="#" th:text="|${blog.countComment} Comments|">12 Comments</a>
                                             </li>
                                         </ul>
-                                        <p>
+                                        <p th:text="${#strings.substring(blog.description,0,100) + ' ...'}">
                                             Nullam nibh mi, tincidunt sed
                                             sapien ut, rutrum hendrerit
                                             velit. Integer auctor a mauris
@@ -58,147 +58,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="blog-post">
-                                    <div class="blog-thumb">
-                                        <img src="assets/images/blog-thumb-02.jpg" alt="" />
-                                    </div>
-                                    <div class="down-content">
-                                        <a href="detail.html">
-                                            <h4>
-                                                Suspendisse et metus
-                                            </h4>
-                                        </a>
-                                        <ul class="post-info">
-                                            <li><a href="#">Admin</a></li>
-                                            <li>
-                                                <a href="#">22/05/2020</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">26 Comments</a>
-                                            </li>
-                                        </ul>
-                                        <p>
-                                            Nullam nibh mi, tincidunt sed
-                                            sapien ut, rutrum hendrerit
-                                            velit. Integer auctor a mauris
-                                            sit amet eleifend.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="blog-post">
-                                    <div class="blog-thumb">
-                                        <img src="assets/images/blog-thumb-03.jpg" alt="" />
-                                    </div>
-                                    <div class="down-content">
-                                        <a href="detail.html">
-                                            <h4>Donec tincidunt leo</h4>
-                                        </a>
-                                        <ul class="post-info">
-                                            <li><a href="#">Admin</a></li>
-                                            <li>
-                                                <a href="#">18/05/2020</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">42 Comments</a>
-                                            </li>
-                                        </ul>
-                                        <p>
-                                            Nullam nibh mi, tincidunt sed
-                                            sapien ut, rutrum hendrerit
-                                            velit. Integer auctor a mauris
-                                            sit amet eleifend.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="blog-post">
-                                    <div class="blog-thumb">
-                                        <img src="assets/images/blog-thumb-04.jpg" alt="" />
-                                    </div>
-                                    <div class="down-content">
-                                        <a href="detail.html">
-                                            <h4>
-                                                Mauris ac dolor ornare
-                                            </h4>
-                                        </a>
-                                        <ul class="post-info">
-                                            <li><a href="#">Admin</a></li>
-                                            <li>
-                                                <a href="#">16/05/2020</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">28 Comments</a>
-                                            </li>
-                                        </ul>
-                                        <p>
-                                            Nullam nibh mi, tincidunt sed
-                                            sapien ut, rutrum hendrerit
-                                            velit. Integer auctor a mauris
-                                            sit amet eleifend.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="blog-post">
-                                    <div class="blog-thumb">
-                                        <img src="assets/images/blog-thumb-05.jpg" alt="" />
-                                    </div>
-                                    <div class="down-content">
-                                        <a href="detail.html">
-                                            <h4>Donec tincidunt leo</h4>
-                                        </a>
-                                        <ul class="post-info">
-                                            <li><a href="#">Admin</a></li>
-                                            <li>
-                                                <a href="#">12/05/2020</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">16 Comments</a>
-                                            </li>
-                                        </ul>
-                                        <p>
-                                            Nullam nibh mi, tincidunt sed
-                                            sapien ut, rutrum hendrerit
-                                            velit. Integer auctor a mauris
-                                            sit amet eleifend.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="blog-post">
-                                    <div class="blog-thumb">
-                                        <img src="assets/images/blog-thumb-06.jpg" alt="" />
-                                    </div>
-                                    <div class="down-content">
-                                        <a href="detail.html">
-                                            <h4>
-                                                Mauris ac dolor ornare
-                                            </h4>
-                                        </a>
-                                        <ul class="post-info">
-                                            <li><a href="#">Admin</a></li>
-                                            <li>
-                                                <a href="#">10/05/2020</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">3 Comments</a>
-                                            </li>
-                                        </ul>
-                                        <p>
-                                            Nullam nibh mi, tincidunt sed
-                                            sapien ut, rutrum hendrerit
-                                            velit. Integer auctor a mauris
-                                            sit amet eleifend.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="col-lg-12">
                                 <ul class="page-numbers">
                                     <li><a href="#">1</a></li>
@@ -243,27 +103,6 @@
                                                     <span>31/05/2020</span>
                                                 </a>
                                             </li>
-                                            <li>
-                                                <a href="detail.html">
-                                                    <h5>
-                                                        Suspendisse et metus
-                                                        nec libero ultrices
-                                                        varius eget in risus
-                                                    </h5>
-                                                    <span>28/05/2020</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="detail.html">
-                                                    <h5>
-                                                        Swag hella echo park
-                                                        leggings, shaman
-                                                        cornhole ethical
-                                                        coloring
-                                                    </h5>
-                                                    <span>14/05/2020</span>
-                                                </a>
-                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -277,24 +116,6 @@
                                         <ul>
                                             <li>
                                                 <a href="#">- Nature Lifestyle</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">- Awesome Layouts</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">- Creative Ideas</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">- Responsive
-                                                    Templates</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">- HTML5 / CSS3
-                                                    Templates</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">- Creative &amp;
-                                                    Unique</a>
                                             </li>
                                         </ul>
                                     </div>
