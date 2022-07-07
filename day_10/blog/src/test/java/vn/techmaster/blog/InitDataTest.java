@@ -4,8 +4,6 @@ import com.github.javafaker.Faker;
 import com.github.slugify.Slugify;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import vn.techmaster.blog.entity.*;
 import vn.techmaster.blog.repository.*;
@@ -14,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-//@DataJpaTest
-//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @SpringBootTest
 public class InitDataTest {
     @Autowired
@@ -85,6 +81,19 @@ public class InitDataTest {
     }
 
     @Test
+    void save_avatar_of_user() {
+        // Lấy ds user
+        List<User> users = userRepository.findAll();
+
+        users.forEach(user -> {
+            List<Image> images = imageRepository.getImagesByUserId(user.getId());
+            String imageRd = images.get(rd.nextInt(images.size())).getUrl();
+            user.setAvatar(imageRd);
+            userRepository.save(user);
+        });
+    }
+
+    @Test
     void save_blog() {
         List<User> users = userRepository.findAll();
         List<Category> categories = categoryRepository.findAll();
@@ -98,7 +107,7 @@ public class InitDataTest {
             List<Category> categoriesRd = new ArrayList<>();
             for (int j = 0; j < 3; j++) {
                 Category categoryRd = categories.get(rd.nextInt(categories.size()));
-                if(!categoriesRd.contains(categoryRd)) {
+                if (!categoriesRd.contains(categoryRd)) {
                     categoriesRd.add(categoryRd);
                 }
             }

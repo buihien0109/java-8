@@ -32,14 +32,14 @@ public class BlogInfo {
             this.authorInfo = null;
         }
     }
-}
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-class AuthorInfo {
-    private Integer id;
-    private String name;
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @ToString
+    static class AuthorInfo {
+        private Integer id;
+        private String name;
+    }
 }
