@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>home page</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<ul>
+    <li><a th:href="@{/}">Home</a></li>
+    <li><a th:href="@{/about}">About</a></li>
+    <li><a th:href="@{/contact}">Contact</a></li>
+</ul>
+<h1>Home page</h1>
+
+<h2>Giá trị của một biến sử dụng ${}</h2>
+<p th:text="${user.id}">Id : </p>
+<p th:text="${user.name}">Name : </p>
+<p th:text="${user.email}">Email : </p>
+
+<p th:text="'Id :' + ${user.id}">Id : </p>
+<p th:text="|Name : ${user.name}|">Name : </p>
+<p >Email : <th:block th:text="${user.email}"></th:block></p>
+
+<h2>Sử dụng vòng lặp</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}">1</td>
+            <td th:text="${user.name}">Nguyễn Văn A</td>
+            <td th:text="${user.email}">a@gmail.com</td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th>index</th>
+            <th>count</th>
+            <th>even</th>
+            <th>odd</th>
+            <th>first</th>
+            <th>last</th>
+            <th>size</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="user, state: ${users}" th:class="${state.odd} ? 'bg-blue' : ''">
+            <td th:text="${state.index}"></td>
+            <td th:text="${state.count}"></td>
+            <td th:text="${state.even}"></td>
+            <td th:text="${state.odd}"></td>
+            <td th:text="${state.first}"></td>
+            <td th:text="${state.last}"></td>
+            <td th:text="${state.size}"></td>
+        </tr>
+    </tbody>
+</table>
+
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

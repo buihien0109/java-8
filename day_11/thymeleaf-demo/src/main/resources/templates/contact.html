@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>contact page</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<ul>
+    <li><a th:href="@{/}">Home</a></li>
+    <li><a th:href="@{/about}">About</a></li>
+    <li><a th:href="@{/contact}">Contact</a></li>
+</ul>
+<h1>Contact page</h1>
+
+<h2>Giá trị của một biến sử dụng th:with</h2>
+
+<th:block th:with="userId = ${user.id}, userName = ${user.name}, info = ${'Tên tôi là : ' + user.name}">
+    <p th:text="${userId}">Id : </p>
+    <p th:text="${userName}">Name : </p>
+    <p th:text="${user.email}">Email : </p>
+    <p th:text="${info}"></p>
+</th:block>
+
+<th:block th:with="user = ${users[0]}">
+    <p th:text="${user.id}">Id : </p>
+    <p th:text="${user.name}">Name : </p>
+    <p th:text="${user.email}">Email : </p>
+</th:block>
+
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody th:with="usersOther = ${ { users[0], users[1] } }">
+    <tr th:each="user : ${usersOther}">
+        <td th:text="${user.id}">1</td>
+        <td th:text="${user.name}">Nguyễn Văn A</td>
+        <td th:text="${user.email}">a@gmail.com</td>
+    </tr>
+    </tbody>
+</table>
+
+
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+h1 {
+    color: blue;
+}
+
+a {
+    text-decoration: none;
+    color: #222;
+    font-size: 20px;
+}
+
+a.active {
+    color : brown;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, tr, th, td {
+    border: 1px solid #000;
+}
+
+.bg-blue {
+    background-color: cornflowerblue;
+}
