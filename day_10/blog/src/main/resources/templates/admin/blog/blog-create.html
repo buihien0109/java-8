@@ -50,15 +50,6 @@
           <button type="button" class="btn btn-info px-4">
             Lưu
           </button>
-          <button type="button" class="btn btn-primary px-4">
-            Preview
-          </button>
-        </div>
-
-        <div class="col-6 d-flex justify-content-end">
-          <button type="button" class="btn btn-danger px-4">
-            Xóa
-          </button>
         </div>
       </div>
 
@@ -100,27 +91,7 @@
                     <label>Danh mục</label>
                     <div class="select2-purple">
                       <select class="select2 form-control" multiple="multiple" id="category">
-                        <option>
-                          Java
-                        </option>
-                        <option>
-                          Golang
-                        </option>
-                        <option>
-                          React
-                        </option>
-                        <option>
-                          Lập trình web
-                        </option>
-                        <option>
-                          Database
-                        </option>
-                        <option>
-                          Tips Trick
-                        </option>
-                        <option>
-                          Devops
-                        </option>
+                        <option th:each="category : ${categoies}" th:value="${category.id}" th:text="${category.name}"></option>
                       </select>
                     </div>
                   </div>

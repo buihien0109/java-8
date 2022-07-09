@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import vn.techmaster.blog.repository.CategoryRepository;
 import vn.techmaster.blog.service.BlogService;
 
 @Controller
@@ -12,6 +13,9 @@ public class BlogController {
 
     @Autowired
     private BlogService blogService;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     // Danh sách tất cả bài viết
     @GetMapping("/admin/blogs")
@@ -35,7 +39,8 @@ public class BlogController {
 
     // Tạo bài viết
     @GetMapping("/admin/blogs/create")
-    public String getBlogCreatePage() {
+    public String getBlogCreatePage(Model model) {
+        model.addAttribute("categoies", categoryRepository.findAll());
         return "admin/blog/blog-create";
     }
 
