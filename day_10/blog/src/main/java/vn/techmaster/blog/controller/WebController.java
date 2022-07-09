@@ -27,23 +27,23 @@ public class WebController {
         model.addAttribute("blogs", blogService.getAllBlogInfo());
         model.addAttribute("blogsPopular", blogService.getBlogPopular(3));
         model.addAttribute("categories", categoryRepository.getCategoriesPopular(5));
-        return "index";
+        return "web/index";
     }
 
     @GetMapping("/blogs/{id}/{slug}")
     public String getDetailPage(@PathVariable String id, Model model) {
         model.addAttribute("blog", blogService.getBlogInfoById(id));
         model.addAttribute("comments", commentRepository.getCommentsByBlogId(id));
-        return "detail";
+        return "web/detail";
     }
 
     @GetMapping("/about")
     public String getAboutPage() {
-        return "about";
+        return "web/about";
     }
 
     @GetMapping("/contact")
     public String getContactPage() {
-        return "contact";
+        return "web/contact";
     }
 }
