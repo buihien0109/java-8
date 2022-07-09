@@ -2,6 +2,7 @@ package vn.techmaster.blog;
 
 import com.github.javafaker.Faker;
 import com.github.slugify.Slugify;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -23,8 +24,14 @@ public class BlogApplication {
     public Slugify slugify() {
         return new Slugify();
     }
+
     @Bean
     public Random random() {
         return new Random();
+    }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 }

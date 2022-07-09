@@ -13,4 +13,6 @@ import java.util.List;
 public interface BlogRepository extends JpaRepository<Blog, String> {
     @Query(name = "getAllBlogInfo", nativeQuery = true)
     List<BlogInfo> getAllBlogInfo();
+
+    List<Blog> getBlogsByUser_Id(Integer id);
 }

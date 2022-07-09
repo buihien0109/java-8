@@ -53,20 +53,20 @@
 								</tr>
 								</thead>
 								<tbody>
-								<tr>
+								<tr th:each="blog : ${blogs}">
 									<td>
-										<a href="./blog-detail.html">Khai giảng khóa
+										<a th:href="@{/admin/blogs/{id}/detail (id = ${blog.id})}" th:text="${blog.title}">Khai giảng khóa
 											Java Spring Boot 12A
 											- song song 2 hình
 											thức offline /
 											online đáp ứng nhu
 											cầu đào tạo từ xa</a>
 									</td>
-									<td>
+									<td th:text="${T(vn.techmaster.blog.util.Utils).generateCategoryString(blog.categories)}">
 										Java, Golang, Springboot
 									</td>
-									<td>Công khai</td>
-									<td>06-07-2022</td>
+									<td th:text="${blog.status} == 1 ? 'Công khai' : 'Ẩn'">Công khai</td>
+									<td th:text="${#temporals.format(blog.createdAt, 'dd-MM-yyy')}">06-07-2022</td>
 								</tr>
 								</tbody>
 							</table>
