@@ -15,4 +15,6 @@ public interface BlogRepository extends JpaRepository<Blog, String> {
     List<BlogInfo> getAllBlogInfo();
 
     List<Blog> getBlogsByUser_Id(Integer id);
+
+    Blog getBlogById(String id);
 }

@@ -47,7 +47,7 @@
           <button type="button" class="btn btn-default">
             <i class="fas fa-chevron-left"></i> Quay lại
           </button>
-          <button type="button" class="btn btn-info px-4">
+          <button type="button" class="btn btn-info px-4" id="btn-create">
             Lưu
           </button>
         </div>
@@ -157,6 +157,38 @@
         codeSyntaxHighlighting: true,
       },
     });
+
+    // Truy cập
+    const titleEl = document.getElementById("title");
+    const descriptionEl = document.getElementById("description");
+    const statusEl = document.getElementById("status");
+    const categoryEl = $("#category");
+    const thumbnailEl = document.getElementById("thumbnail");
+    const btnCreate = document.getElementById("btn-create");
+
+    // Tạo blog
+    btnCreate.addEventListener("click", async function () {
+      let categories = categoryEl.val();
+      categories = categories.map(e => Number(e));
+
+      let res = await axios.post("/api/admin/blogs", {
+        title : titleEl.value,
+        description : descriptionEl.value,
+        content : easyMDE.value(),
+        thumbnail : thumbnailEl.getAttribute("src"),
+        status : statusEl.value,
+        categories : categories
+      });
+
+      if(res.data) {
+        alert("Tạo bài viết thành công");
+
+        setTimeout(() => {
+          window.location.href = "/admin/blogs";
+        }, 1500);
+      }
+    })
+
   </script>
 </th:block>
 

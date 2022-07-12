@@ -3,8 +3,6 @@ package vn.techmaster.blog.entity;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import vn.techmaster.blog.dto.BlogInfo;
-import vn.techmaster.blog.dto.UserDto;
-import vn.techmaster.blog.dto.UserImageInfo;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -97,8 +95,15 @@ public class Blog {
 
     @PrePersist
     public void prePersist() {
-        createdAt = LocalDateTime.now().minusMonths(2);
-        updatedAt =createdAt;
+        createdAt = LocalDateTime.now();
+        if(status == 1) {
+            pulishedAt = createdAt;
+        }
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updatedAt = LocalDateTime.now();
         if(status == 1) {
             pulishedAt = updatedAt;
         }
