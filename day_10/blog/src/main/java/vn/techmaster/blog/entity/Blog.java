@@ -93,6 +93,9 @@ public class Blog {
             inverseJoinColumns = @JoinColumn(name = "categories_id"))
     private List<Category> categories = new ArrayList<>();
 
+    @OneToMany(mappedBy = "blog", fetch = FetchType.LAZY)
+    private List<Comment> comments;
+
     @PrePersist
     public void prePersist() {
         createdAt = LocalDateTime.now();
@@ -107,5 +110,13 @@ public class Blog {
         if(status == 1) {
             pulishedAt = updatedAt;
         }
+    }
+
+    @PreRemove
+    public void preRemove() {
+        this.categories = null;
+
+        this.comments.forEach(comment -> comment.setBlog(null));
+        this.comments = null;
     }
 }

@@ -4,6 +4,7 @@ import com.github.slugify.Slugify;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import vn.techmaster.blog.dto.BlogDto;
 import vn.techmaster.blog.dto.BlogInfo;
 import vn.techmaster.blog.entity.Blog;
