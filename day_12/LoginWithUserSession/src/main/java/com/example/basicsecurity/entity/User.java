@@ -6,6 +6,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Builder
@@ -19,7 +20,7 @@ import java.util.List;
         name = "json",
         typeClass = JsonStringType.class
 )
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
