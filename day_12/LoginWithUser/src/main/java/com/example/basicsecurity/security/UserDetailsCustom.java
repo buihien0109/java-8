@@ -22,6 +22,10 @@ import java.util.List;
 public class UserDetailsCustom implements UserDetails {
     private User user;
 
+    public String getFullName() {
+        return user.getName();
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> roles = new ArrayList<>();
